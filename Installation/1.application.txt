@@ -1,0 +1,4 @@
+$ composer create-project symfony/website-skeleton:^4.1.19 GestionPersonnage
+$ composer require server
+
+

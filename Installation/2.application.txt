@@ -1,0 +1,9 @@
+$ composer create-project symfony/website-skeleton:^4.1.19 GestionAnimaux
+$ composer require server
+$ bin/console doctrine:database:create
+
+
+$ composer require orm-fixtures --dev
+
+
+

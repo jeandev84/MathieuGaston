@@ -3,10 +3,4 @@
 3. GESTION D'ALIMENTS
 4. GESTION DE VOITURE
 
-=========================================================================
-Create first project :
-$ composer create-project symfony/website-skeleton:^4.1.19 GestionPersonnage
-
-=========================================================================
-$ composer require server
 

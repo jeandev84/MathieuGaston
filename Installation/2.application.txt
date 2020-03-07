@@ -3,7 +3,12 @@ $ composer require server
 $ bin/console doctrine:database:create
 
 
+FIXTURES:
 $ composer require orm-fixtures --dev
+$ bin/console make:fixtures AnimalFixtures
+$ bin/console doctrine:fixtures:load
+$ bin/console doctrine:fixtures:load --append
 
 
+$ bin/console make:controller AnimalController
 

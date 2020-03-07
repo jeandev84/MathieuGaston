@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Affichage de l'animal{% endblock %}
+{% block monTitre %}Affichage de l'animal {{ animal.name }}{% endblock %}
+{% block body %}
+<div class="row align-items-center">
+   <div class="col-2 text-center">
+       <img src="{{ asset('images/' ~ animal.image) }}" alt="">
+   </div>
+   <div class="col-auto">
+       <div>Description: {{ animal.description }}</div>
+       <div>Weight: {{ animal.weight }}</div>
+       <div>
+           Dangerous:
+           {{ animal.dangerous ? '<span class="badge badge-danger">OUI</span>' : '<span class="badge badge-success">NON</span>'}}
+       </div>
+   </div>
+</div>
+{% endblock %}
+

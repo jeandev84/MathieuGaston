@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+{#
   <div>
     <img src="{{ asset('images/personnages/Marc.png') }}" alt="">
   </div>
@@ -15,4 +16,41 @@
   <div>Force: {{ caract.force }}</div>
   <div>Agilite: {{ caract.agi }}</div>
   <div>Intel: {{ caract.intel }}</div>
+#}
+
+<table class="table">
+  <tr class="thead-dark">
+     <th>Image</th>
+     <th>Nom</th>
+     <th>Age</th>
+     <th>Sexe</th>
+     <th>Force</th>
+     <th>Agilite</th>
+     <th>Intelligence</th>
+  </tr>
+  {% for player in players %}
+    <tr>
+        <td>
+            <img src="{{  asset('images/personnages/' ~ player.nom ~ '.png') }}" alt="">
+        </td>
+        <td>
+            <a href="{{ path('afficher_personnage', {'nom': player.nom | lower}) }}">
+                {{ player.nom }}
+            </a>
+        </td>
+        <td>{{ player.age }}</td>
+        <td>
+            {% if player.sexe %}
+                Homme
+            {% else %}
+                Femme
+            {% endif %}
+        </td>
+        <td>{{ player.caract.force }}</td>
+        <td>{{ player.caract.agi }}</td>
+        <td>{{ player.caract.intel }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
 {% endblock %}

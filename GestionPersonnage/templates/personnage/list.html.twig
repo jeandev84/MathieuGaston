@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personnages{% endblock %}
+
+{% block monTitre %}
+    Liste des personnages
+{% endblock %}
+
+{% block body %}
+  <div>
+    <img src="{{ asset('images/personnages/Marc.png') }}" alt="">
+  </div>
+  <div>Pseudo: {{ pseudo }}</div>
+  <div>Age: {{ age }}</div>
+  <div>Force: {{ caract.force }}</div>
+  <div>Agilite: {{ caract.agi }}</div>
+  <div>Intel: {{ caract.intel }}</div>
+{% endblock %}

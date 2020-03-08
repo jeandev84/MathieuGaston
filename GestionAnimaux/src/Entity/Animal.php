@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,6 +46,29 @@ class Animal
      * dangereux
     */
     private $dangerous;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Familly", inversedBy="animals")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $familly;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Continent", mappedBy="animals")
+     */
+    private $continents;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Dispose", mappedBy="animal")
+     */
+    private $disposes;
+
+    public function __construct()
+    {
+        $this->continents = new ArrayCollection();
+        $this->disposes = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -106,6 +131,77 @@ class Animal
     public function setDangerous(bool $dangerous): self
     {
         $this->dangerous = $dangerous;
+
+        return $this;
+    }
+
+    public function getFamilly(): ?Familly
+    {
+        return $this->familly;
+    }
+
+    public function setFamilly(?Familly $familly): self
+    {
+        $this->familly = $familly;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Continent[]
+     */
+    public function getContinents(): Collection
+    {
+        return $this->continents;
+    }
+
+    public function addContinent(Continent $continent): self
+    {
+        if (!$this->continents->contains($continent)) {
+            $this->continents[] = $continent;
+            $continent->addAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContinent(Continent $continent): self
+    {
+        if ($this->continents->contains($continent)) {
+            $this->continents->removeElement($continent);
+            $continent->removeAnimal($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Dispose[]
+     */
+    public function getDisposes(): Collection
+    {
+        return $this->disposes;
+    }
+
+    public function addDispose(Dispose $dispose): self
+    {
+        if (!$this->disposes->contains($dispose)) {
+            $this->disposes[] = $dispose;
+            $dispose->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDispose(Dispose $dispose): self
+    {
+        if ($this->disposes->contains($dispose)) {
+            $this->disposes->removeElement($dispose);
+            // set the owning side to null (unless already changed)
+            if ($dispose->getAnimal() === $this) {
+                $dispose->setAnimal(null);
+            }
+        }
 
         return $this;
     }

@@ -14,6 +14,24 @@
            Dangerous:
            {{ animal.dangerous ? '<span class="badge badge-danger">OUI</span>' : '<span class="badge badge-success">NON</span>'}}
        </div>
+       <div>
+           <a href="{{ path('familly.show', {'id': animal.familly.id}) }}" class="btn btn-primary">
+               {{ animal.familly.libelle }}
+           </a>
+       </div>
+       <div>
+           {% for continent in animal.continents %}
+               <a href="{{ path('continent.show', {'id': continent.id}) }}" class="btn btn-warning">
+                   {{ continent.libelle }}
+               </a>
+           {% endfor %}
+       </div>
+       <!-- recuperer les personnes dont dispose un animal en particulier-->
+       <div>
+           {% for  dispose in  animal.disposes %}
+               <a href="{{ path('person.show', {'id': dispose.personnes.id}) }}" class="btn btn-info">{{ dispose.personnes.name }}</a>
+           {% endfor %}
+       </div>
    </div>
 </div>
 {% endblock %}

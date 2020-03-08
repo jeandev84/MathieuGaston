@@ -10,8 +10,29 @@
                 <img src="{{ asset('images/' ~ animal.image) }}" alt="">
             </div>
             <div class="col-auto">
-                <h2><a href="{{ path('animal.show', {'id': animal.id }) }}">{{ animal.name }}</a></h2>
+                <h2>
+                    <a href="{{ path('animal.show', {'id': animal.id }) }}">{{ animal.name }}</a>
+                </h2>
                 <div>{{ animal.description }}</div>
+                <div>
+                    <a href="{{ path('familly.show', {'id': animal.familly.id}) }}" class="btn btn-primary">
+                        {{ animal.familly.libelle }}
+                    </a>
+                </div>
+                <!-- recuperer tous les continents -->
+                <div>
+                    {% for continent in animal.continents %}
+                        <a href="{{ path('continent.show', {'id': continent.id}) }}" class="btn btn-warning">
+                            {{ continent.libelle }}
+                        </a>
+                    {% endfor %}
+                </div>
+                <!-- recuperer les personnes qui dispose de l'animal -->
+                <div>
+                    {% for  dispose in  animal.disposes %}
+                        <a href="{{ path('person.show', {'id': dispose.personnes.id}) }}" class="btn btn-info">{{ dispose.personnes.name }}</a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     {% endfor %}

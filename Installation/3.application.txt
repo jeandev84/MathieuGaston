@@ -1,0 +1,35 @@
+$ composer create-project symfony/website-skeleton:^4.1.19 GestionAliments
+$ composer require server
+$ bin/console doctrine:database:create
+
+$ bin/console make:entity Aliment
+
+FIXTURES:
+$ composer require orm-fixtures --dev
+# $ bin/console make:fixtures AlimentFixtures
+$ bin/console doctrine:fixtures:load
+$ bin/console doctrine:fixtures:load --append
+
+Nom      Carotte   Patate   Tomate   Pomme
+Prix     1.80       1.5     2.3      2.35
+Calorie  36         80      18       52
+Proteine 0.77       1.8     0.86     0.25
+Glucide  6.45       16.7    2.26     11.6
+Lipide   0.26       0.34    0.24     0.25
+
+
+$a1 = new Aliment();
+$a1->setName('Carotte')
+   ->setPrice(1.8)
+   ->setCalorie(36)
+   ->setImage('aliments/carotte.png')
+   ->setProteine(0.77)
+   ->setGlucide(6.45)
+   ->setLipide(0.26);
+
+$manager->persist($a1);
+
+
+$ bin/console make:controller AlimentController
+
+

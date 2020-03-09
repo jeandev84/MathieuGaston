@@ -33,3 +33,7 @@ $manager->persist($a1);
 $ bin/console make:controller AlimentController
 
 
+=====================================================================
+Administration :
+$ bin/console make:controller
+ > Admin\AdminAlimentController

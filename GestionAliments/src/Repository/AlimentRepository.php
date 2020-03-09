@@ -19,6 +19,53 @@ class AlimentRepository extends ServiceEntityRepository
         parent::__construct($registry, Aliment::class);
     }
 
+    /**
+     * Recuperer tous les aliments inferieur a la valeur en parametre
+     * @param string $property
+     * @param string $signe
+     * @param $calorie
+     * @return mixed
+     */
+    /*
+    public function getAlimentByNumberCalorie($calorie)
+    {
+        return $this->createQueryBuilder('a')
+                   ->andWhere('a.calorie < :calorie')
+                   ->setParameter('calorie', $calorie)
+                   ->getQuery()
+                   ->getResult();
+    }
+    public function getAlimentProperty(string $property, string $signe, $value)
+    {
+        return $this->createQueryBuilder('a')
+                  //->andWhere('a.'. $property .' '. $signe .' :val')
+                    ->andWhere(sprintf('a.%s %s :val', $property, $value))
+                    ->setParameter('val', $value)
+                    ->getQuery()
+                    ->getResult();
+    }
+    */
+
+
+
+
+    /**
+     * Recuperer tous les aliments inferieur a la valeur en parametre
+     * @param string $property
+     * @param string $signe
+     * @param $value
+     * @return mixed
+   */
+    public function getAlimentByProperty(string $property, string $signe, $value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere(sprintf('a.%s %s :val', $property, $signe))
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult();
+    }
+
+
     // /**
     //  * @return Aliment[] Returns an array of Aliment objects
     //  */
@@ -47,4 +94,5 @@ class AlimentRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

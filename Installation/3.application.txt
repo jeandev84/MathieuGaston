@@ -37,3 +37,10 @@ $ bin/console make:controller AlimentController
 Administration :
 $ bin/console make:controller
  > Admin\AdminAlimentController
+
+
+
+======================================================================
+
+Upload Image
+$ composer require vich/uploader-bundle

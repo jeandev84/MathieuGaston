@@ -4,11 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlimentRepository")
- */
+ * @Vich\Uploadable()
+*/
 class Aliment
 {
     /**
@@ -45,6 +49,12 @@ class Aliment
      */
     private $image;
 
+
+    /**
+     * @Vich\UploadableField(mapping="aliment_image", fileNameProperty="image")
+    */
+    private $imageFile;
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -64,6 +74,11 @@ class Aliment
      * @ORM\Column(type="float")
      */
     private $lipide;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -99,12 +114,39 @@ class Aliment
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     * @return Aliment
+     * @throws \Exception
+   */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        if($imageFile instanceof UploadedFile)
+        {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+
 
     public function getCalorie(): ?int
     {
@@ -150,6 +192,18 @@ class Aliment
     public function setLipide(float $lipide): self
     {
         $this->lipide = $lipide;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

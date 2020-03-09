@@ -28,7 +28,8 @@
         "symfony/validator": "*",
         "symfony/web-link": "*",
         "symfony/web-server-bundle": "4.4.*",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "vich/uploader-bundle": "^1.13"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

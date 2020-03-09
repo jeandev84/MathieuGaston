@@ -13,9 +13,11 @@
  {{ form_start(form) }}
 <div class="row">
  <div class="col-6">
-  <img src="{{ asset('images/' ~ aliment.image) }}" style="width: 25%;">
+  {% if isModification %}
+   <img src="{{ asset('images/aliments/' ~ aliment.image) }}" style="width: 25%;">
+  {% endif %}
   <div>
-     {{ form_row(form.image, {'attr': {'placeholder': 'aliments/myimage.png'}}) }}
+     {{ form_row(form.imageFile) }}
   </div>
   <div>
    {{ form_row(form.name, {'attr': {'class': 'text-danger bg-success'}, 'label': "Nom de l'aliment"}) }}

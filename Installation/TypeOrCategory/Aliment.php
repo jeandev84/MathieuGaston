@@ -81,10 +81,9 @@ class Aliment
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Type", inversedBy="aliments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="aliments")
      */
-    private $type;
-
+    private $category;
 
     public function getId(): ?int
     {
@@ -214,14 +213,14 @@ class Aliment
         return $this;
     }
 
-    public function getType(): ?Type
+    public function getCategory(): ?Category
     {
-        return $this->type;
+        return $this->category;
     }
 
-    public function setType(?Type $type): self
+    public function setCategory(?Category $category): self
     {
-        $this->type = $type;
+        $this->category = $category;
 
         return $this;
     }

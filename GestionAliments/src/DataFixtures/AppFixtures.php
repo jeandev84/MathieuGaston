@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
         $a1->setName('Carotte')
             ->setPrice(1.80)
             ->setCalorie(36)
-            ->setImage('aliments/carotte.png')
+            ->setImage('carotte.png')
             ->setProteine(0.77)
             ->setGlucide(6.45)
             ->setLipide(0.26);
@@ -28,7 +28,7 @@ class AppFixtures extends Fixture
         $a2->setName('Patate')
             ->setPrice(1.5)
             ->setCalorie(80)
-            ->setImage('aliments/patate.jpg')
+            ->setImage('patate.jpg')
             ->setProteine(1.8)
             ->setGlucide(16.7)
             ->setLipide(0.34);
@@ -36,17 +36,17 @@ class AppFixtures extends Fixture
         $manager->persist($a2);
 
 
-        # Tomate
-        $a3 = new Aliment();
-        $a3->setName('Tomate')
-            ->setPrice(2.3)
-            ->setCalorie(18)
-            ->setImage('aliments/tomate.png')
-            ->setProteine(0.86)
-            ->setGlucide(2.26)
-            ->setLipide(0.24);
-
-        $manager->persist($a3);
+//        # Tomate
+//        $a3 = new Aliment();
+//        $a3->setName('Tomate')
+//            ->setPrice(2.3)
+//            ->setCalorie(18)
+//            ->setImage('tomate.png')
+//            ->setProteine(0.86)
+//            ->setGlucide(2.26)
+//            ->setLipide(0.24);
+//
+//        $manager->persist($a3);
 
 
         # Pomme
@@ -54,7 +54,7 @@ class AppFixtures extends Fixture
         $a4->setName('Pomme')
             ->setPrice(2.35)
             ->setCalorie(52)
-            ->setImage('aliments/pomme.png')
+            ->setImage('pomme.png')
             ->setProteine(0.25)
             ->setGlucide(11.6)
             ->setLipide(0.25);

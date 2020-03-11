@@ -5,6 +5,12 @@
 {% block monTitre %}Login{% endblock %}
 
 {% block body %}
+    {% if error %}
+        <div class="alert alert-danger">
+            <!-- Les informations sont incorrectes ou mal renseignees -->
+            {{ error.messageKey | trans(error.messageData, 'security')}}
+        </div>
+    {% endif %}
     <form action="{{ path('connexion') }}" method="post">
        <div class="form-group">
            <label for="">Login : </label>
@@ -16,4 +22,5 @@
         </div>
         <input type="submit" class="btn btn-primary" value="s'identifier">
     </form>
+    <small>login: demo123 , password: demo123! </small>
 {% endblock %}

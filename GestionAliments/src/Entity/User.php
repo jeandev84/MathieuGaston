@@ -59,6 +59,11 @@ class User implements UserInterface
     x*/
     private $confirmPassword;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $roles;
+
 
     public function getId(): ?int
     {
@@ -110,11 +115,27 @@ class User implements UserInterface
 
     /**
      * @inheritDoc
+     *
+     * UPDATE user SET roles = 'ROLE_USER'
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
-        return ['ROLE_USER'];
+        /* return ['ROLE_USER']; */
+        return [$this->roles];
+    }
+
+
+    public function setRoles(?string $roles): self
+    {
+        // si le roles est null
+        if($roles === null)
+        {
+            $this->roles = "ROLE_USER";
+        }else{
+            $this->roles = $roles;
+        }
+
+        return $this;
     }
 
     /**
@@ -122,7 +143,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        // return '';
     }
 
     /**
@@ -130,6 +151,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+
     }
+
 }

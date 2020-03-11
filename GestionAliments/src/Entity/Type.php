@@ -4,11 +4,16 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Cette entite pouvait etre nommee Category
  * @ORM\Entity(repositoryClass="App\Repository\TypeRepository")
+ * @Vich\Uploadable()
  */
 class Type
 {
@@ -29,10 +34,24 @@ class Type
      */
     private $image;
 
+
+    /**
+     * @Vich\UploadableField(mapping="type_image", fileNameProperty="image")
+     *
+     * mapping est le nom definit dans la configuration "config/packages/vich_uploader.yaml"
+    */
+    private $imageFile;
+
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Aliment", mappedBy="type")
      */
     private $aliments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -68,6 +87,33 @@ class Type
         return $this;
     }
 
+
+    /**
+     * @return mixed
+    */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     * @return Aliment
+     * @throws \Exception
+     */
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+
+        if($imageFile instanceof UploadedFile)
+        {
+            $this->createdAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+
     /**
      * @return Collection|Aliment[]
      */
@@ -95,6 +141,18 @@ class Type
                 $aliment->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

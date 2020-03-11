@@ -2,33 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Type;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-/**
- * Class TypeType (or renamed by CategoryType)
- * @package App\Form
- */
-class TypeType extends AbstractType
+class InscriptionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle')
-            ->add('imageFile', FileType::class, [
-                'required' => false
-            ])
+            ->add('username')
+            ->add('password', PasswordType::class)
+            ->add('confirmPassword',  PasswordType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Type::class,
+            'data_class' => User::class,
         ]);
     }
 }

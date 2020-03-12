@@ -8,3 +8,7 @@ https://github.com/fzaninotto/Faker
 
 $ composer require knplabs/knp-paginator-bundle
 https://github.com/KnpLabs/KnpPaginatorBundle
+
+
+FILTRES:
+$ bin/console make:form RechercheVoitureType

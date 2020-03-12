@@ -5,8 +5,37 @@
 {% block monTitre %}
     Liste des voitures
 {% endblock %}
+
 {% block body %}
-   <div class="row no-gutters">
+<!-- Message Flash -->
+{% for  message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+    
+<!-- Filter -->
+{{ form_start(form) }}
+<div class="row no-gutters align-items-center text-center">
+    <div class="col">
+        {{ form_row(form.minAnnee) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.maxAnnee) }}
+    </div>
+    <div class="col-2">
+        <input type="submit" value="Rechercher" class="btn btn-primary">
+    </div>
+</div>
+{{ form_end(form) }}
+<!-- End Filter -->
+<!-- Ajouter une voiture -->
+{% if admin %}
+<a href="{{ path('admin.voiture.create') }}" class="d-block btn btn-success">Ajouter</a>
+{% endif %}
+
+<!-- End voiture -->
+<div class="row no-gutters">
        {% for voiture in  voitures %}
            <div class="col-12 col-lg-6 p-1">
                <div class="card mb-3">
@@ -28,9 +57,19 @@
                            </div>
                        </div>
                    </div>
+                   {% if admin %}
+                       <div class="row no-gutters">
+                           <a href="{{ path('admin.voiture.edit', {'id': voiture.id }) }}" class="col btn btn-warning">Modifier</a>
+                           <form method="POST" class="col" action="{{ path('admin.voiture.delete', {'id': voiture.id}) }}" onsubmit="return confirm('Voulez vous variment supprimer?')">
+                               <input type="hidden" name="_method" value="DELETE">
+                               <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ voiture.id) }}">
+                               <input type="submit" class="btn btn-danger w-100" value="Supprimer">
+                           </form>
+                       </div>
+                   {% endif %}
                </div>
            </div>
-       {% endfor %}
+   {% endfor %}
    </div>
    <!-- pagination -->
     <div class="navigation">

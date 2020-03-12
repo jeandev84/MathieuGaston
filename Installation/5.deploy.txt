@@ -1,0 +1,26 @@
+Deploiement du site sur un serveur
+
+1.
+$ composer require symfony/apache-pack
+
+Genere un fichier .htaccess dans public comme ceci : /public/.htaccess
+
+2. renseigner toutes les informations .env
+APP_ENV=dev basculer a APP_ENV=prod
+
+
+3. creer sa base de donnees dans le host
+en tenant compte de DATABASE_URL
+# IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml
+DATABASE_URL=mysql://root:@127.0.0.1:3306/voitures
+
+
+4. Supprimer le cache dans /var/*
+   Supprimer les fichiers d'upload sur le serveur
+
+
+5. Ainsi avec FireZilla uploader ses fichiers dans
+public_html ou www ... ou autre nom de fichier du host.
+
+
+
